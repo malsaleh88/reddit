@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public class AuthController {
 
+
     private final AuthService authService;
 
     @PostMapping("/signup")
@@ -30,6 +31,8 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("dddd222222logiiiiiiiiin22");
+
         AuthenticationResponse response = authService.login(loginRequest);
         return ResponseEntity.ok(response);
     }

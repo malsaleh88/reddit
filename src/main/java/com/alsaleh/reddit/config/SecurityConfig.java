@@ -39,7 +39,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/subreddit").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/subreddit").authenticated()
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/posts/**").permitAll() // 👈 Add this line
+                        .anyRequest().permitAll() // 👈 TEMP: allow everything
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
