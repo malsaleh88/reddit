@@ -39,13 +39,19 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/subreddit").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/subreddit").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/posts/**").permitAll() // 👈 Add this line
-                        .anyRequest().permitAll() // 👈 TEMP: allow everything
+                        .requestMatchers(HttpMethod.POST, "/api/posts/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/comments/**").permitAll()
+
+                        // ✅ Springdoc paths
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

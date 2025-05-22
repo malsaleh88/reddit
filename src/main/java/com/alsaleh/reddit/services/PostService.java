@@ -39,6 +39,7 @@ public class PostService {
         System.out.println("sammmmmmmservvvvvvvicmmmmme");
 
         User currentUser = authService.getCurrentUser();
+
         Post post = postMapper.map(postRequest, subreddit, currentUser);
 
         // ✅ SAVE the post to the database
